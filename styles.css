@@ -280,7 +280,7 @@ a {
   top: 673px;
   left: 187px;
   display: flex;
-  height: 38px;
+  height: 42px;
   align-items: center;
   gap: 12px;
 }
@@ -291,8 +291,8 @@ a {
 }
 
 .socials span {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   flex: 0 0 auto;
 }
 
