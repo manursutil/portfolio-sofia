@@ -291,13 +291,32 @@ a {
 }
 
 .socials span {
+  position: relative;
   width: 33px;
+  height: 33px;
+  flex: 0 0 auto;
 }
 
 .socials img {
-  width: 100%;
-  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: 100%;
+  transform: translate(-50%, -50%);
   filter: invert(1);
+}
+
+.social-icon--linkedin img {
+  height: 150%;
+}
+
+.socials .social-icon--email {
+  width: 52px;
+}
+
+.social-icon--email img {
+  height: 118.6%;
 }
 
 @media (max-width: 768px) {
