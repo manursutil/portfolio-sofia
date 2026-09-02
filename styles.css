@@ -42,7 +42,7 @@ a {
   flex: 0 0 1440px;
   width: 1440px;
   height: 8363px;
-  overflow: hidden;
+  overflow: visible;
   background: var(--black);
   transform: scale(var(--stage-scale, 1));
   transform-origin: top center;
@@ -242,6 +242,19 @@ a {
   height: 912px;
   background: var(--about);
   color: var(--black);
+  isolation: isolate;
+}
+
+.about::before {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: var(--viewport-stage-width, 100%);
+  background: var(--about);
+  content: "";
+  transform: translateX(-50%);
 }
 
 .about h2 {
@@ -490,6 +503,10 @@ a {
     min-height: 100svh;
     margin-top: 88px;
     padding: 68px 20px 48px;
+  }
+
+  .about::before {
+    content: none;
   }
 
   .about h2 {

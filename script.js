@@ -12,6 +12,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 function syncStageScale() {
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     stage.style.removeProperty("--stage-scale");
+    stage.style.removeProperty("--viewport-stage-width");
     stageShell.style.removeProperty("height");
     const heroScale = Math.min(window.innerHeight / MOBILE_HERO_HEIGHT, 1);
     heroLayout.style.setProperty("--hero-fit-scale", heroScale);
@@ -25,6 +26,7 @@ function syncStageScale() {
     1,
   );
   stage.style.setProperty("--stage-scale", scale);
+  stage.style.setProperty("--viewport-stage-width", `${window.innerWidth / scale}px`);
   stageShell.style.height = `${DESIGN_HEIGHT * scale}px`;
 }
 
