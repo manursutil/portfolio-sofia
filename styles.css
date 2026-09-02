@@ -286,37 +286,29 @@ a {
 }
 
 .socials span,
-.socials img {
+.socials svg {
   display: block;
 }
 
 .socials span {
-  position: relative;
   width: 33px;
   height: 33px;
   flex: 0 0 auto;
 }
 
-.socials img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: auto;
+.socials svg {
+  width: 100%;
   height: 100%;
-  transform: translate(-50%, -50%);
-  filter: invert(1);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.social-icon--linkedin img {
-  height: 150%;
-}
-
-.socials .social-icon--email {
-  width: 52px;
-}
-
-.social-icon--email img {
-  height: 118.6%;
+.socials .social-icon-dot {
+  fill: currentColor;
+  stroke: none;
 }
 
 @media (max-width: 768px) {
