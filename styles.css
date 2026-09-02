@@ -74,20 +74,14 @@ a {
 
 .brand {
   left: 30px;
+  gap: 8px;
 }
 
-.brand span:first-child {
-  font-family: Inter, Arial, sans-serif;
-  font-size: 12px;
-}
-
+.brand span:first-child,
 .brand span:last-child,
 .nav-link {
+  font-family: var(--body);
   font-size: 24px;
-}
-
-.brand span:last-child {
-  margin-top: 20px;
 }
 
 .navigation {
@@ -319,19 +313,13 @@ a {
 
   .brand {
     left: 20px;
+    gap: 6px;
   }
 
-  .brand span:first-child {
-    font-size: 10px;
-  }
-
+  .brand span:first-child,
   .brand span:last-child,
   .nav-link {
     font-size: 16px;
-  }
-
-  .brand span:last-child {
-    margin-top: 12px;
   }
 
   .navigation {
