@@ -3,7 +3,7 @@
   --black: #000;
   --white: #fff;
   --placeholder: #d9d9d9;
-  --about: #737373;
+  --about: #fff;
   --display: "Abhaya Libre", Georgia, serif;
   --body: "Anuphan", Arial, sans-serif;
 }
@@ -223,6 +223,7 @@ a {
   width: 1488px;
   height: 912px;
   background: var(--about);
+  color: var(--black);
 }
 
 .about h2 {
@@ -283,6 +284,7 @@ a {
 .socials img {
   width: 100%;
   height: auto;
+  filter: invert(1);
 }
 
 @media (max-width: 768px) {
