@@ -1,5 +1,4 @@
 const DESIGN_WIDTH = 1440;
-const DESIGN_HEIGHT = 8363;
 const HERO_CONTENT_HEIGHT = 1060;
 const MOBILE_HERO_HEIGHT = 900;
 const MOBILE_BREAKPOINT = 768;
@@ -9,11 +8,26 @@ const stageShell = document.querySelector(".stage-shell");
 const heroLayout = document.querySelector(".hero-layout");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+function syncStageHeight() {
+  if (window.innerWidth <= MOBILE_BREAKPOINT) {
+    stageShell.style.removeProperty("height");
+    return;
+  }
+
+  const scale = Number.parseFloat(
+    stage.style.getPropertyValue("--stage-scale"),
+  ) || 1;
+  stageShell.style.height = `${stage.offsetHeight * scale}px`;
+}
+
 function syncStageScale() {
   if (window.innerWidth <= MOBILE_BREAKPOINT) {
     stage.style.removeProperty("--stage-scale");
     stage.style.removeProperty("--viewport-stage-width");
     stageShell.style.removeProperty("height");
+    document.querySelectorAll("[style*='--layout-x']").forEach((element) => {
+      element.style.removeProperty("--layout-x");
+    });
     const heroScale = Math.min(window.innerHeight / MOBILE_HERO_HEIGHT, 1);
     heroLayout.style.setProperty("--hero-fit-scale", heroScale);
     return;
@@ -23,11 +37,31 @@ function syncStageScale() {
   const scale = Math.min(
     window.innerWidth / DESIGN_WIDTH,
     window.innerHeight / HERO_CONTENT_HEIGHT,
-    1,
   );
+  const layoutWidth = window.innerWidth / scale;
+
   stage.style.setProperty("--stage-scale", scale);
-  stage.style.setProperty("--viewport-stage-width", `${window.innerWidth / scale}px`);
-  stageShell.style.height = `${DESIGN_HEIGHT * scale}px`;
+  stage.style.setProperty("--viewport-stage-width", `${layoutWidth}px`);
+
+  const setSpreadPosition = (element, x, width) => {
+    if (!element) return;
+    const centerRatio = (x + width / 2) / DESIGN_WIDTH;
+    const spreadX = centerRatio * layoutWidth - width / 2;
+    element.style.setProperty("--layout-x", `${spreadX}px`);
+  };
+
+  document.querySelectorAll(".hero-media").forEach((element) => {
+    const styles = element.style;
+    const x = Number.parseFloat(styles.getPropertyValue("--x"));
+    const width = Number.parseFloat(styles.getPropertyValue("--w"));
+    if (!Number.isFinite(x) || !Number.isFinite(width)) return;
+
+    setSpreadPosition(element, x, width);
+  });
+
+  setSpreadPosition(document.querySelector(".hero h1"), 257, 925);
+  setSpreadPosition(document.querySelector(".scroll-cue"), 683, 69);
+  syncStageHeight();
 }
 
 function updateCurrentLink(hash) {
@@ -84,3 +118,11 @@ if (reduceMotion.matches) {
 
 syncStageScale();
 window.addEventListener("resize", syncStageScale, { passive: true });
+window.addEventListener("load", syncStageHeight, { once: true });
+
+if ("ResizeObserver" in window) {
+  const stageResizeObserver = new ResizeObserver(syncStageHeight);
+  stageResizeObserver.observe(stage);
+}
+
+document.fonts?.ready.then(syncStageHeight);

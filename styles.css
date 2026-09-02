@@ -33,15 +33,16 @@ a {
 .stage-shell {
   display: flex;
   height: 8363px;
+  align-items: flex-start;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .stage {
   position: relative;
-  flex: 0 0 1440px;
-  width: 1440px;
-  height: 8363px;
+  flex: 0 0 var(--viewport-stage-width, 1440px);
+  width: var(--viewport-stage-width, 1440px);
+  height: auto;
   overflow: visible;
   background: var(--black);
   transform: scale(var(--stage-scale, 1));
@@ -123,7 +124,7 @@ a {
 .hero-media,
 .node {
   position: absolute;
-  left: calc(var(--x) * 1px);
+  left: var(--layout-x, calc(var(--x) * 1px));
   top: calc(var(--y) * 1px);
   width: calc(var(--w) * 1px);
   height: calc(var(--h) * 1px);
@@ -139,7 +140,7 @@ a {
   position: absolute;
   z-index: 4;
   top: 447px;
-  left: 257px;
+  left: var(--layout-x, 257px);
   width: 925px;
   margin: 0;
   font-family: var(--display);
@@ -153,7 +154,7 @@ a {
   position: absolute;
   z-index: 5;
   top: 968px;
-  left: 683px;
+  left: var(--layout-x, 683px);
   width: 69px;
   height: 60px;
   filter: drop-shadow(0 3px 5px rgb(0 0 0 / 80%));
@@ -234,11 +235,141 @@ a {
   object-fit: cover;
 }
 
+@media (min-width: 769px) {
+  .page-content {
+    position: relative;
+    width: 100%;
+    padding-top: 1222px;
+  }
+
+  .page-content .showreel {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: calc(100% - clamp(48px, 6vw, 112px));
+    height: auto;
+    margin: 0 auto clamp(64px, 7vw, 112px);
+    aspect-ratio: 1177 / 815;
+  }
+
+  .project {
+    display: grid;
+    grid-template-columns: clamp(62px, 6vw, 96px) repeat(3, minmax(0, 1fr));
+    gap: clamp(12px, 1.5vw, 24px);
+    margin: 0 clamp(24px, 3vw, 56px) clamp(64px, 7vw, 112px);
+  }
+
+  .project .node {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    min-width: 0;
+  }
+
+  .project-title {
+    width: auto;
+    grid-column: 1;
+    grid-row: 1 / 4;
+    align-self: center;
+    justify-self: center;
+    margin: 0;
+    font-size: 50px;
+    line-height: 1;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    transform-origin: center;
+  }
+
+  .project-feature {
+    grid-column: 2 / 4;
+    grid-row: 1 / 3;
+    align-self: stretch;
+    aspect-ratio: 724 / 448;
+  }
+
+  .project > :nth-child(3) {
+    grid-column: 4;
+    grid-row: 1;
+  }
+
+  .project > :nth-child(4) {
+    grid-column: 4;
+    grid-row: 2;
+  }
+
+  .project > :nth-child(5) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .project > :nth-child(6) {
+    grid-column: 3;
+    grid-row: 3;
+  }
+
+  .project > :nth-child(7) {
+    grid-column: 4;
+    grid-row: 3;
+  }
+
+  .project-image:not(.project-feature) {
+    aspect-ratio: 16 / 9;
+  }
+
+  .page-content .about {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: grid;
+    width: 100%;
+    height: auto;
+    min-height: 912px;
+    grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.8fr);
+    grid-template-rows: auto 1fr auto;
+    column-gap: clamp(48px, 7vw, 132px);
+    padding: 124px clamp(48px, 9vw, 170px) 112px;
+  }
+
+  .page-content .about h2,
+  .page-content .about-copy,
+  .page-content .about-photo,
+  .page-content .socials {
+    position: static;
+  }
+
+  .page-content .about h2 {
+    width: auto;
+    margin-bottom: 48px;
+    white-space: normal;
+  }
+
+  .page-content .about-copy {
+    width: auto;
+  }
+
+  .page-content .about-photo {
+    width: min(31vw, 461px);
+    height: auto;
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+    justify-self: end;
+    aspect-ratio: 1;
+  }
+
+  .page-content .socials {
+    margin-top: 24px;
+  }
+}
+
 .about {
   position: absolute;
   top: 7451px;
-  left: -25px;
-  width: 1488px;
+  left: 0;
+  width: 100%;
   height: 912px;
   background: var(--about);
   color: var(--black);
@@ -260,7 +391,7 @@ a {
 .about h2 {
   position: absolute;
   top: 124px;
-  left: 131px;
+  left: var(--layout-x, 131px);
   width: 666px;
   margin: 0;
   font-family: var(--display);
@@ -273,7 +404,7 @@ a {
 .about-copy {
   position: absolute;
   top: 271px;
-  left: 179px;
+  left: var(--layout-x, 179px);
   width: 692px;
   font-size: 24px;
   line-height: 1.32;
@@ -286,7 +417,7 @@ a {
 .about-photo {
   position: absolute;
   top: 206px;
-  left: 897px;
+  left: var(--layout-x, 897px);
   width: 461px;
   height: 461px;
   border-radius: 50%;
@@ -296,19 +427,19 @@ a {
 .socials {
   position: absolute;
   top: 673px;
-  left: 187px;
+  left: var(--layout-x, 187px);
   display: flex;
   height: 42px;
   align-items: center;
   gap: 12px;
 }
 
-.socials span,
+.socials .social-icon,
 .socials svg {
   display: block;
 }
 
-.socials span {
+.socials .social-icon {
   width: 42px;
   height: 42px;
   flex: 0 0 auto;
@@ -329,6 +460,10 @@ a {
 }
 
 @media (max-width: 768px) {
+  .page-content {
+    padding-top: 0;
+  }
+
   .stage-shell {
     display: block;
     height: auto !important;
@@ -501,6 +636,7 @@ a {
     width: 100%;
     height: auto;
     min-height: 100svh;
+    display: block;
     margin-top: 88px;
     padding: 68px 20px 48px;
   }
