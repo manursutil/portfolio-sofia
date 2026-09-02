@@ -1,11 +1,9 @@
 const DESIGN_WIDTH = 1440;
 const HERO_CONTENT_HEIGHT = 1060;
-const MOBILE_HERO_HEIGHT = 900;
 const MOBILE_BREAKPOINT = 768;
 
 const stage = document.querySelector(".stage");
 const stageShell = document.querySelector(".stage-shell");
-const heroLayout = document.querySelector(".hero-layout");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 function syncStageHeight() {
@@ -28,12 +26,9 @@ function syncStageScale() {
     document.querySelectorAll("[style*='--layout-x']").forEach((element) => {
       element.style.removeProperty("--layout-x");
     });
-    const heroScale = Math.min(window.innerHeight / MOBILE_HERO_HEIGHT, 1);
-    heroLayout.style.setProperty("--hero-fit-scale", heroScale);
     return;
   }
 
-  heroLayout.style.removeProperty("--hero-fit-scale");
   const scale = Math.min(
     window.innerWidth / DESIGN_WIDTH,
     window.innerHeight / HERO_CONTENT_HEIGHT,
