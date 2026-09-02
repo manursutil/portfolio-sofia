@@ -151,6 +151,7 @@ a {
   left: 683px;
   width: 69px;
   height: 60px;
+  filter: drop-shadow(0 3px 5px rgb(0 0 0 / 80%));
 }
 
 .scroll-cue span {
@@ -177,7 +178,7 @@ a {
 @keyframes scroll-prompt {
   0%,
   100% {
-    opacity: 0.25;
+    opacity: 0.55;
     transform: translateY(-4px) rotate(45deg);
   }
 
@@ -504,5 +505,6 @@ a {
 
   .scroll-cue span {
     animation: none;
+    opacity: 1;
   }
 }
