@@ -54,6 +54,11 @@ a {
   height: 1222px;
 }
 
+.hero-layout {
+  position: absolute;
+  inset: 0;
+}
+
 .site-header {
   position: absolute;
   inset: 0;
@@ -327,8 +332,14 @@ a {
 
   .hero {
     position: relative;
-    height: max(900px, 100svh);
+    height: 100svh;
     overflow: hidden;
+  }
+
+  .hero-layout {
+    height: 900px;
+    transform: scale(var(--hero-fit-scale, 1));
+    transform-origin: top center;
   }
 
   .brand,
