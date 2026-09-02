@@ -306,9 +306,8 @@ a {
   stroke-linejoin: round;
 }
 
-.socials .social-icon-dot {
-  fill: currentColor;
-  stroke: none;
+.socials svg * {
+  vector-effect: non-scaling-stroke;
 }
 
 @media (max-width: 768px) {
